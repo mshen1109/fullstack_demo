@@ -1,0 +1,24 @@
+version: 2
+services:
+  - name: backend
+    type: web
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerContext: backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: MONGO_URI
+        value: ${{MongoDB.DATABASE_URL}}
+    
+  - name: frontend  
+    type: web
+    env: docker
+    dockerfilePath: Dockerfile
+    dockerContext: frontend
+    
+  - name: mongo
+    type: database
+    plan: starter
